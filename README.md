@@ -22,7 +22,7 @@ This is a Rust program that monitors a log file and extracts the `remote_ip` fro
    git clone https://github.com/oarinv/readlog.git
 2. Navigate to the project directory:
    ```shell
-   cd log-monitoring-rust
+   cd readlog
 3. Modify the log_file_path and result_file_path variables in the main function of src/main.rs to specify the paths of your log file and result file.
 
 4. Build and run the program:
