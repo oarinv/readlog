@@ -1,3 +1,4 @@
+use chrono::Local;
 use std::collections::HashSet;
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, BufWriter, Write};
@@ -33,10 +34,13 @@ async fn main() -> io::Result<()> {
                             // 判断 remote_ip 是否已经出现过
                             if seen_ips.insert(remote_ip.clone()) {
                                 // remote_ip 是新的值，写入结果文件
-                                writeln!(writer, "{}", remote_ip)?;
+                                // 添加时间记录
+                                let current_time = Local::now();
+                                let formatted_time =
+                                    current_time.format("%Y年%m月%d日 %H:%M:%S").to_string();
+                                writeln!(writer, "{} {}", formatted_time, remote_ip)?;
                                 writer.flush()?;
                                 println!("Found matching log line. Remote IP: {}", remote_ip);
-                                // 在这里可以添加更多的处理逻辑
                             }
                         }
                     }
